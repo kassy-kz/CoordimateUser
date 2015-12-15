@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -96,30 +97,6 @@ public class GetCoordinateActivity extends AppCompatActivity {
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("CoordinateObject");
             query.orderByDescending("createdAt");
-//            query.getFirstInBackground(new GetCallback<ParseObject>() {
-//                public void done(ParseObject object, ParseException e) {
-//                    if (e == null) {
-//                        // object will be your game score
-//                        Log.i(TAG, "foo=" + object.get("foo"));
-//                        ParseFile file = (ParseFile) object.get("image");
-//                        file.getDataInBackground(new GetDataCallback() {
-//                            public void done(byte[] data, ParseException e) {
-//                                if (e == null) {
-//                                    Log.d("test", "We've got data in data.");
-//                                    // use data for something
-//                                    bmp1 = BitmapFactory.decodeByteArray(data, 0, data.length);
-//
-//                                } else {
-//                                    Log.d("test", "There was a problem downloading the data.");
-//                                }
-//                            }
-//                        });
-//                    } else {
-//                        // something went wrong
-//                        Log.i(TAG, "error");
-//                    }
-//                }
-//            });
             try {
                 List<ParseObject> list = query.find();
                 ParseFile file = (ParseFile) list.get(getArguments().getInt("a")).get("image");
@@ -141,18 +118,26 @@ public class GetCoordinateActivity extends AppCompatActivity {
             }
 
             Log.i(TAG,"getA" + getArguments().getInt("a"));
-//            switch (getArguments().getInt("a")) {
-//                case 0:
-//                    mImgClothes.setImageBitmap(bmp1);
-//                    break;
-//                case 1:
-//                    mImgClothes.setImageBitmap(bmp1);
-//                    break;
-//                case 2:
-//                    mImgClothes.setImageBitmap(bmp1);
-//                    break;
-//            }
-//
+            TextView tv = (TextView) view.findViewById(R.id.txtShopName);
+            TextView tv2 = (TextView) view.findViewById(R.id.txtPrice);
+            switch (getArguments().getInt("a")) {
+                case 0:
+                    tv.setText("ショップA案");
+                    tv2.setText("27000円");
+                    break;
+                case 1:
+                    tv.setText("ショップB案");
+                    tv2.setText("29000円");
+                    break;
+                case 2:
+                    tv.setText("ショップC案");
+                    tv2.setText("31000円");
+                    break;
+                case 3:
+                    tv.setText("ショップD案");
+                    break;
+            }
+
 
             return view;
         }

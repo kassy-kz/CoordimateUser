@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     ImageView mImageView;
+    Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setType("image/*");
         startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
 
-
+        mActivity = this;
 
     }
 
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                     testObject.put("foo", "bar1541");
                     testObject.put("image", testFile);
                     testObject.saveInBackground();
+
+                    Toast.makeText(mActivity, "見積もり依頼が送信されました", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
